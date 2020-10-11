@@ -1,6 +1,5 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
-import pickle
 import joblib
 import helpers.weather_for_model as weather
 import pandas as pd
