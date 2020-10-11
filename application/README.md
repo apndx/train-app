@@ -1,5 +1,5 @@
 # Train predictor app
 
-First run model.py to get `modeltrain.py` file to test app if not exists.
+If the application does not yet have a ml-model, first run from root folder `python application/model.py` to create the machine learning model. For this you will need file `trains_and_weather.csv` with the train and weather data.
 
-Then run locally with `python app.py` and go to `localhost:5000/home`. 
+Then run application from root folder with command `python run.py` and go to `localhost:5000/home`.
