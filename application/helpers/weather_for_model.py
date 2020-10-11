@@ -14,7 +14,7 @@ def give_prediction(stationId, month, day, hour):
     stationShortCode = ''
     weather_area = 0
     station_name = ''
-    with open("../utils/stations.json", 'r', encoding="utf-8") as f:
+    with open("utils/stations.json", 'r', encoding="utf-8") as f:
         stations = json.load(f)
         for station in stations:
             if station['stationShortCodeCategory'] == stationId:
@@ -22,10 +22,10 @@ def give_prediction(stationId, month, day, hour):
                 station_name = station['stationName']
                 break
     if stationShortCode != '':
-        with open("../utils/weather_stations.json", 'r', encoding="utf-8") as f:
+        with open("utils/weather_stations.json", 'r', encoding="utf-8") as f:
             weather_stations = json.load(f)
             weather_area = weather_stations.get(stationShortCode)
-        with open("../utils/weather-locations.json", 'r', encoding="utf-8") as f:
+        with open("utils/weather-locations.json", 'r', encoding="utf-8") as f:
             places = json.load(f)
             place = places.get(str(weather_area))['latlon']
 

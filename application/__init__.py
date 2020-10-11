@@ -6,10 +6,10 @@ import pandas as pd
 import json
 
 app = Flask(__name__)
-model = joblib.load('model.z')
+model = joblib.load('application/model.z')
 
 def create_stations_json():
-    df = pd.read_json("../utils/stations.json")
+    df = pd.read_json("utils/stations.json")
     df = df[df['stationShortCodeCategory'] >= 0]
     df = df[['stationName',"stationShortCodeCategory"]].drop_duplicates()
     df.set_index('stationName',inplace=True)
@@ -17,7 +17,7 @@ def create_stations_json():
 
 stations = create_stations_json()
 
-with open('../utils/lines.json', 'r') as f:
+with open('utils/lines.json', 'r') as f:
     lines = json.load(f)
 
 @app.route('/home')
