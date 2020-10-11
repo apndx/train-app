@@ -38,8 +38,9 @@ with open("utils/lines.json", "w") as f:
 
 
 # For now selecting commuterLineID, stationShortCode, month, day, hour, direction, rain, celcius, windGustSpeed, windSpeed
-X = dataset.iloc[0:1000,lambda df: [0,1,6,7,8,13,14,15,16,17]]
-y = dataset.iloc[0:1000, 3]
+dataset = dataset.sample(25000)
+X = dataset.iloc[0:25000,lambda df: [0,1,6,7,8,13,14,15,16,17]]
+y = dataset.iloc[0:25000, 3]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     train_size=0.80, test_size=0.20, random_state=66)
@@ -52,6 +53,5 @@ joblib.dump(rf, 'application/model')
 
 # Testing after building model
 
-model2 = joblib.load('model')
+model2 = joblib.load('application/model')
 print(model2.predict([[1,8, 6, 2, 22, 1, 0.0, 14.42, 3.77, 1.55]]))
-

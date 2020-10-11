@@ -40,11 +40,18 @@ def predict():
     inputs = [select_line] + inputs[1:1] + [select_station] + inputs[2:]  
     features = [np.array(inputs)]
     print("feat ", features)
-    prediction = model.predict(features)
-    res = int(prediction[0])
+
     direction = ', train coming from Helsinki main station' if inputs[5] == 1 else ', train going towards Helsinki main station'
     prediction_info = f'Date and time: {weatherPrediction[6].strftime("%d/%m/%Y %H:%M")}, train {lines.get(select_line_str)}, station {weatherPrediction[4]}{direction}'
     weather_info = f'Weather prediction for {weatherPrediction[5]} weather station: rain amount: {weatherPrediction[0]} mm/h, temperature: {weatherPrediction[1]} ℃, wind gusts: {weatherPrediction[2]} m/s, wind speed: {weatherPrediction[3]} m/s'
+    features_sum = np.sum(features)
+
+    if np.isnan(features_sum):
+        return render_template('index.html', prediction_minutes='Cannot get a prediction for this time', stations=stations, lines=lines, prediction_info=prediction_info, weather_info=weather_info)
+
+    prediction = model.predict(features)
+    res = int(prediction[0])
+
     return render_template('index.html', prediction_minutes='Predicted train delay {} minute(s)'.format(res), stations=stations, lines=lines, prediction_info=prediction_info, weather_info=weather_info)
 
 @app.route('/statistics', methods=['POST'])
