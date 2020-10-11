@@ -1,7 +1,7 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import joblib
-from app.helpers import weather_for_model as weather
+from application.helpers import weather_for_model as weather
 import pandas as pd
 import json
 
