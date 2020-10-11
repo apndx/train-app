@@ -6,7 +6,7 @@ import pandas as pd
 import json
 
 app = Flask(__name__)
-model = joblib.load('application/model.z')
+model = joblib.load('application/model')
 
 def create_stations_json():
     df = pd.read_json("utils/stations.json")
