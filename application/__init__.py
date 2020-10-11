@@ -1,7 +1,7 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import joblib
-import helpers.weather_for_model as weather
+from app.helpers import weather_for_model as weather
 import pandas as pd
 import json
 
@@ -50,6 +50,3 @@ def predict():
 @app.route('/statistics', methods=['POST'])
 def statistics():
     return render_template('statistics.html', stations=stations, lines=lines)
-
-if __name__ == "__main__":
-    app.run(debug=True)
